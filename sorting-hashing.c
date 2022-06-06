@@ -200,7 +200,7 @@ int insertionSort(int *a)
 
 	printArray(a);
 
-	//i부터 Max Array Size까지 반복 
+	//i=0부터 Max Array Size까지 반복 
 	for(i = 1; i < MAX_ARRAY_SIZE; i++)
 	{
 		t = a[i];
@@ -229,8 +229,10 @@ int bubbleSort(int *a)
 
 	printArray(a);
 	
+	//i=0부터 Max Array Size까지 반복 
 	for(i = 0; i < MAX_ARRAY_SIZE; i++)
 	{
+		//j=0부터 Max Array Size까지 반복 
 		for (j = 0; j < MAX_ARRAY_SIZE; j++)
 		{
 			if (a[j-1] > a[j]) //a[j-1] > a[j] 이면
@@ -260,7 +262,7 @@ int shellSort(int *a)
 
 	for (h = MAX_ARRAY_SIZE/2; h > 0; h /= 2) //h를 1/2로 사용 
 	{
-		for (i = 0; i < h; i++) //h의 수만큼 반복
+		for (i = 0; i < h; i++) //i=0부터 h의 수만큼 반복
 		{
 			for(j = i + h; j < MAX_ARRAY_SIZE; j += h)
 			{
