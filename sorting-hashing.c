@@ -38,6 +38,7 @@ int main()
 
 	srand(time(NULL));
 
+	printf("[----- [Cho Jeong Dong] [2017015041] -----]\n");
 	do{
 		printf("----------------------------------------------------------------\n");
 		printf("                        Sorting & Hashing                       \n");
@@ -54,38 +55,38 @@ int main()
 
 		switch(command) {
 		case 'z': case 'Z':
-			initialize(&array);
+			initialize(&array); //배열 생성 함수
 			break;
 		case 'q': case 'Q':
-			freeArray(array);
+			freeArray(array); //메모리 해제 함수
 			break;
 		case 's': case 'S':
-			selectionSort(array);
+			selectionSort(array); //선택 정렬 함수
 			break;
 		case 'i': case 'I':
-			insertionSort(array);
+			insertionSort(array); //삽입 정렬 함수
 			break;
 		case 'b': case 'B':
-			bubbleSort(array);
+			bubbleSort(array); //버블 정렬 함수
 			break;
 		case 'l': case 'L':
-			shellSort(array);
+			shellSort(array); //쉘 정렬 함수
 			break;
 		case 'k': case 'K':
 			printf("Quick Sort: \n");
 			printf("----------------------------------------------------------------\n");
-			printArray(array);
-			quickSort(array, MAX_ARRAY_SIZE);
+			printArray(array); 
+			quickSort(array, MAX_ARRAY_SIZE); //퀵 정렬 함수
 			printf("----------------------------------------------------------------\n");
 			printArray(array);
 
 			break;
 
 		case 'h': case 'H':
-			printf("Hashing: \n");
+			printf("Hashing: \n"); 
 			printf("----------------------------------------------------------------\n");
-			printArray(array);
-			hashing(array, &hashtable);
+			printArray(array); 
+			hashing(array, &hashtable); //해싱 함수
 			printArray(hashtable);
 			break;
 
@@ -94,11 +95,11 @@ int main()
 			scanf("%d", &key);
 			printArray(hashtable);
 			index = search(hashtable, key);
-			printf("key = %d, index = %d,  hashtable[%d] = %d\n", key, index, index, hashtable[index]);
+			printf("key = %d, index = %d,  hashtable[%d] = %d\n", key, index, index, hashtable[index]); //해시 테이블 
 			break;
 
 		case 'p': case 'P':
-			printArray(array);
+			printArray(array); //배열 출력
 			break;
 		default:
 			printf("\n       >>>>>   Concentration!!   <<<<<     \n");
@@ -112,7 +113,7 @@ int main()
 
 int initialize(int** a)
 {
-	int *temp = NULL;
+	int *temp = NULL; //포인터의 값을 NULL값으로 선언
 
 	/* array가 NULL인 경우 메모리 할당 */
 	if(*a == NULL) {
@@ -128,6 +129,7 @@ int initialize(int** a)
 	return 0;
 }
 
+//배열 메모리 해제 함수
 int freeArray(int *a)
 {
 	if(a != NULL)
@@ -135,12 +137,16 @@ int freeArray(int *a)
 	return 0;
 }
 
+//배열 출력 함수
 void printArray(int *a)
 {
+	//NULL이면 출력 X
 	if (a == NULL) {
 		printf("nothing to print.\n");
 		return;
 	}
+
+	//출력
 	for(int i = 0; i < MAX_ARRAY_SIZE; i++)
 		printf("a[%02d] ", i);
 	printf("\n");
@@ -149,7 +155,7 @@ void printArray(int *a)
 	printf("\n");
 }
 
-
+//선택 정렬 함수
 int selectionSort(int *a)
 {
 	int min;
@@ -160,12 +166,14 @@ int selectionSort(int *a)
 	printf("----------------------------------------------------------------\n");
 
 	printArray(a);
-
+ 
+	
 	for (i = 0; i < MAX_ARRAY_SIZE; i++)
 	{
 		minindex = i;
 		min = a[i];
-		for(j = i+1; j < MAX_ARRAY_SIZE; j++)
+		//i번째부터 정렬하도록 함
+		for(j = i+1; j < MAX_ARRAY_SIZE; j++) //Max Array Size까지
 		{
 			if (min > a[j])
 			{
@@ -182,6 +190,7 @@ int selectionSort(int *a)
 	return 0;
 }
 
+//삽입 정렬 함수
 int insertionSort(int *a)
 {
 	int i, j, t;
@@ -191,6 +200,7 @@ int insertionSort(int *a)
 
 	printArray(a);
 
+	//i부터 Max Array Size까지 반복 
 	for(i = 1; i < MAX_ARRAY_SIZE; i++)
 	{
 		t = a[i];
@@ -209,6 +219,7 @@ int insertionSort(int *a)
 	return 0;
 }
 
+//버블 정렬 함수
 int bubbleSort(int *a)
 {
 	int i, j, t;
@@ -217,14 +228,14 @@ int bubbleSort(int *a)
 	printf("----------------------------------------------------------------\n");
 
 	printArray(a);
-
+	
 	for(i = 0; i < MAX_ARRAY_SIZE; i++)
 	{
 		for (j = 0; j < MAX_ARRAY_SIZE; j++)
 		{
-			if (a[j-1] > a[j])
+			if (a[j-1] > a[j]) //a[j-1] > a[j] 이면
 			{
-				t = a[j-1];
+				t = a[j-1]; 
 				a[j-1] = a[j];
 				a[j] = t;
 			}
@@ -237,6 +248,7 @@ int bubbleSort(int *a)
 	return 0;
 }
 
+//쉘 정렬 함수
 int shellSort(int *a)
 {
 	int i, j, k, h, v;
@@ -246,15 +258,15 @@ int shellSort(int *a)
 
 	printArray(a);
 
-	for (h = MAX_ARRAY_SIZE/2; h > 0; h /= 2)
+	for (h = MAX_ARRAY_SIZE/2; h > 0; h /= 2) //h를 1/2로 사용 
 	{
-		for (i = 0; i < h; i++)
+		for (i = 0; i < h; i++) //h의 수만큼 반복
 		{
 			for(j = i + h; j < MAX_ARRAY_SIZE; j += h)
 			{
 				v = a[j];
 				k = j;
-				while (k > h-1 && a[k-h] > v)
+				while (k > h-1 && a[k-h] > v) //k > h-1이고 a[k-h] > v일때
 				{
 					a[k] = a[k-h];
 					k -= h;
@@ -269,11 +281,13 @@ int shellSort(int *a)
 	return 0;
 }
 
+// 퀵 정렬 함수
 int quickSort(int *a, int n)
 {
 	int v, t;
 	int i, j;
 
+	//n>1 이면
 	if (n > 1)
 	{
 		v = a[n-1];
@@ -282,8 +296,8 @@ int quickSort(int *a, int n)
 
 		while(1)
 		{
-			while(a[++i] < v);
-			while(a[--j] > v);
+			while(a[++i] < v); //a[++i] < v동안
+			while(a[--j] > v); //a[--j] > v동안
 
 			if (i >= j) break;
 			t = a[i];
@@ -294,8 +308,8 @@ int quickSort(int *a, int n)
 		a[i] = a[n-1];
 		a[n-1] = t;
 
-		quickSort(a, i);
-		quickSort(a+i+1, n-i-1);
+		quickSort(a, i); //왼쪽 퀵 정렬
+		quickSort(a+i+1, n-i-1); //오른쪽 퀵 정렬
 	}
 
 
@@ -306,6 +320,7 @@ int hashCode(int key) {
    return key % MAX_HASH_TABLE_SIZE;
 }
 
+//해싱 함수
 int hashing(int *a, int **ht)
 {
 	int *hashtable = NULL;
@@ -357,19 +372,17 @@ int hashing(int *a, int **ht)
 	return 0;
 }
 
+//탐색 함수
 int search(int *ht, int key)
 {
-	int index = hashCode(key);
+	int index = hashCode(key); //index에 해싴코드 저장
 
-	if(ht[index] == key)
-		return index;
+	if(ht[index] == key) //같을경우
+		return index; //index로 리턴
 
-	while(ht[++index] != key)
+	while(ht[++index] != key) //아닐경우
 	{
-		index = index % MAX_HASH_TABLE_SIZE;
+		index = index % MAX_HASH_TABLE_SIZE; 
 	}
 	return index;
 }
-
-
-
